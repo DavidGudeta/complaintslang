@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 
 import { AuthProvider, useAuth } from './contexts/AuthContext';
 import { NotificationProvider } from './contexts/NotificationContext';
+import { LanguageProvider } from './contexts/LanguageContext';
 
 import { LandingPage } from './pages/LandingPage';
 import { SubmitComplaint } from './pages/SubmitComplaint';
@@ -334,12 +335,14 @@ function AppRoutes() {
 // ---------------- APP ----------------
 export default function App() {
   return (
-    <AuthProvider>
-      <NotificationProvider>
-        <Router>
-          <AppRoutes />
-        </Router>
-      </NotificationProvider>
-    </AuthProvider>
+    <LanguageProvider>
+      <AuthProvider>
+        <NotificationProvider>
+          <Router>
+            <AppRoutes />
+          </Router>
+        </NotificationProvider>
+      </AuthProvider>
+    </LanguageProvider>
   );
 }

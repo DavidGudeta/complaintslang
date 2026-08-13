@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { ShieldCheck, FileText, Search, ArrowRight, CheckCircle2, MessageSquare, Shield, Zap } from 'lucide-react';
 import { motion } from 'motion/react';
+import { LanguageSwitcher } from '../components/LanguageSwitcher';
 
 export function LandingPage() {
   return (
@@ -16,6 +17,7 @@ export function LandingPage() {
         <nav className="hidden md:flex items-center gap-8 text-sm font-bold text-sky-500">
           <Link to="/contact" className="hover:text-sky-900 transition-colors">Contact</Link>
           <Link to="/feedback" className="hover:text-sky-900 transition-colors">Feedback</Link>
+          <LanguageSwitcher />
         </nav>
       </header>
 
