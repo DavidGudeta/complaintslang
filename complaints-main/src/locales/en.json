@@ -178,8 +178,10 @@
     },
     "complaint": {
       "searchPlaceholder": "Search complaints by ID, name, TIN or subject...",
+      "description": "Manage and review taxpayer complaints in this category.",
       "statusLabel": "Status",
       "allComplaints": "All Complaints",
+      "allOption": "All",
       "pendingStatus": "Pending",
       "assignedStatus": "Assigned",
       "inProgressStatus": "In Progress",
@@ -435,6 +437,7 @@
     "update": "Update",
     "search": "Search",
     "filter": "Filter",
+    "hideFilters": "Hide Filters",
     "sort": "Sort",
     "export": "Export",
     "import": "Import",
@@ -452,7 +455,8 @@
     "viewAll": "View All",
     "yes": "Yes",
     "no": "No",
-    "ok": "OK"
+    "ok": "OK",
+    "reset": "Reset"
   },
   "form": {
     "requiredField": "This field is required",

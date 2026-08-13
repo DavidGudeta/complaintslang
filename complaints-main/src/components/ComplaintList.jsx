@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { 
   FileText, 
   Clock, 
@@ -33,6 +34,7 @@ import api from '../lib/axios';
 import { UserRole, ComplaintStatus } from '../types';
 
 export function ComplaintList({ title, status, role, userId, isAllComplaints }) {
+  const { t } = useTranslation();
   const { user: currentUser } = useAuth();
   const navigate = useNavigate();
 const {
@@ -186,7 +188,7 @@ const {
         <div className="flex justify-between items-center">
           <div>
             <h1 className="text-4xl font-bold text-sky-900 tracking-tight italic serif">{title}</h1>
-            <p className="text-sky-500 mt-2">Manage and review taxpayer complaints in this category.</p>
+            <p className="text-sky-500 mt-2">{t('components.complaint.description')}</p>
           </div>
           <div className="flex items-center gap-3">
             {isAllComplaints && (
@@ -194,20 +196,20 @@ const {
                 onClick={() => navigate('/submit')}
                 className="flex items-center gap-2 px-4 py-2 bg-emerald-600 text-white rounded-xl text-sm font-bold hover:bg-emerald-700 transition-all shadow-lg shadow-emerald-100"
               >
-                <Plus size={16} /> Add Complaint
+                <Plus size={16} /> {t('buttons.add')}
               </button>
             )}
             <button
               onClick={() => setShowFilters((prev) => !prev)}
               className="flex items-center gap-2 px-4 py-2 bg-sky-50 border border-sky-200 rounded-xl text-sm font-bold text-sky-600 hover:bg-sky-100 transition-all"
             >
-              <Filter size={16} /> {showFilters ? 'Hide Filters' : 'Filter'}
+              <Filter size={16} /> {showFilters ? t('buttons.hideFilters') : t('buttons.filter')}
             </button>
             <button
               onClick={handleExport}
               className="flex items-center gap-2 px-4 py-2 bg-sky-600 text-white rounded-xl text-sm font-bold hover:bg-sky-700 transition-all shadow-lg shadow-sky-100"
             >
-              <Download size={16} /> Export
+              <Download size={16} /> {t('buttons.export')}
             </button>
           </div>
         </div>
@@ -216,25 +218,25 @@ const {
           <div className="rounded-[2rem] border border-sky-100 bg-sky-50 p-4 shadow-sm">
             <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
               <div className="flex items-center gap-3">
-                <label className="text-sm font-semibold text-sky-700">Status</label>
+                <label className="text-sm font-semibold text-sky-700">{t('components.complaint.statusLabel')}</label>
                 <select
                   value={statusFilter}
                   onChange={(e) => setStatusFilter(e.target.value)}
                   className="rounded-xl border border-sky-200 bg-white px-3 py-2 text-sm text-sky-900"
                 >
-                  <option value="all">All</option>
-                  <option value="PENDING">Pending</option>
-                  <option value="ASSIGNED">Assigned</option>
-                  <option value="IN_PROGRESS">In Progress</option>
-                  <option value="CLOSED">Closed</option>
-                  <option value="APPROVED">Approved</option>
+                  <option value="all">{t('components.complaint.allOption')}</option>
+                  <option value="PENDING">{t('statuses.pending')}</option>
+                  <option value="ASSIGNED">{t('statuses.assigned')}</option>
+                  <option value="IN_PROGRESS">{t('statuses.inProgress')}</option>
+                  <option value="CLOSED">{t('statuses.closed')}</option>
+                  <option value="APPROVED">{t('statuses.approved')}</option>
                 </select>
               </div>
               <button
                 onClick={() => { setStatusFilter('all'); setSearchTerm(''); }}
                 className="text-sm font-semibold text-sky-600 hover:text-sky-800"
               >
-                Reset
+                {t('buttons.reset')}
               </button>
             </div>
           </div>
@@ -295,7 +297,7 @@ const {
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-sky-400" size={18} />
               <input 
                 type="text" 
-                placeholder="Search complaints by ID, name, TIN or subject..." 
+                placeholder={t('components.complaint.searchPlaceholder')}
                 className="w-full pl-10 pr-4 py-2 bg-white border border-sky-200 rounded-xl text-sm focus:ring-1 focus:ring-sky-500 transition-all outline-none"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}

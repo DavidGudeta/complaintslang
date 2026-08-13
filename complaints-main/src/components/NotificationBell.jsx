@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Bell, Check, ExternalLink, Clock, AlertCircle, UserPlus, MessageSquare, Info, Trash2 } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import { useNotifications } from '../contexts/NotificationContext';
 import { NotificationType } from '../types';
 import { formatDate, cn } from '../lib/utils';
@@ -7,6 +8,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import { Link } from 'react-router-dom';
 
 export function NotificationBell() {
+  const { t } = useTranslation();
   const { notifications, unreadCount, markAsRead, markAllAsRead, deleteNotification, clearAllNotifications } = useNotifications();
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
@@ -55,14 +57,14 @@ export function NotificationBell() {
             className="absolute right-0 mt-2 w-80 bg-white rounded-3xl shadow-2xl shadow-sky-200/50 border border-sky-100 overflow-hidden z-50"
           >
             <div className="p-4 border-b border-sky-100 flex items-center justify-between bg-sky-50/50 gap-2">
-              <h3 className="font-bold text-sky-900">Notifications</h3>
+              <h3 className="font-bold text-sky-900">{t('notifications.title')}</h3>
               <div className="flex items-center gap-2 flex-wrap justify-end">
                 {unreadCount > 0 && (
                   <button
                     onClick={() => markAllAsRead()}
                     className="text-xs font-bold text-sky-600 hover:text-sky-700 flex items-center gap-1"
                   >
-                    <Check size={14} /> Mark all as read
+                    <Check size={14} /> {t('messages.markAllAsRead')}
                   </button>
                 )}
                 {notifications.length > 0 && (
@@ -70,7 +72,7 @@ export function NotificationBell() {
                     onClick={() => clearAllNotifications()}
                     className="text-xs font-bold text-rose-600 hover:text-rose-700 flex items-center gap-1"
                   >
-                    <Trash2 size={14} /> Clear All
+                    <Trash2 size={14} /> {t('messages.clearAll')}
                   </button>
                 )}
               </div>

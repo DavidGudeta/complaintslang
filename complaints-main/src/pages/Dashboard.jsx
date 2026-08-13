@@ -13,12 +13,14 @@ import {
   Zap
 } from 'lucide-react';
 import { motion } from 'motion/react';
+import { useTranslation } from 'react-i18next';
 import { useAuth } from '../contexts/AuthContext';
 import { cn } from '../lib/utils';
 import { UserRole } from '../types';
 import api from '../lib/axios';
 
 export function Dashboard() {
+  const { t } = useTranslation();
   const { user } = useAuth();
   const effectiveRole = user?.display_role || user?.role;
   const headOfficeRoles = [
@@ -80,20 +82,20 @@ export function Dashboard() {
 
   const getCards = () => {
     const baseCards = [
-      { title: 'Total Complaints', value: stats.total, icon: <FileText size={24} />, color: 'bg-sky-600', trend: '+12%', up: true },
-      { title: 'Pending Review', value: stats.pending, icon: <Clock size={24} />, color: 'bg-amber-500', trend: '-5%', up: false },
-      { title: 'In Progress', value: stats.in_progress, icon: <TrendingUp size={24} />, color: 'bg-sky-500', trend: '+8%', up: true },
-      { title: 'Resolved Cases', value: stats.closed, icon: <CheckCircle2 size={24} />, color: 'bg-sky-700', trend: '+15%', up: true },
+      { title: t('pages.dashboard.totalComplaints'), value: stats.total, icon: <FileText size={24} />, color: 'bg-sky-600', trend: '+12%', up: true },
+      { title: t('pages.dashboard.pendingReview'), value: stats.pending, icon: <Clock size={24} />, color: 'bg-amber-500', trend: '-5%', up: false },
+      { title: t('pages.dashboard.inProgress'), value: stats.in_progress, icon: <TrendingUp size={24} />, color: 'bg-sky-500', trend: '+8%', up: true },
+      { title: t('pages.dashboard.resolvedCases'), value: stats.closed, icon: <CheckCircle2 size={24} />, color: 'bg-sky-700', trend: '+15%', up: true },
     ];
 
     const isOfficerUser = [UserRole.OFFICER, UserRole.HEAD_OFFICE_OFFICER].includes(effectiveRole);
 
     if (isOfficerUser) {
       return [
-        { title: 'My Total Cases', value: stats.total, icon: <ClipboardList size={24} />, color: 'bg-sky-600', trend: 'Active', up: true },
-        { title: 'My Pending', value: stats.pending, icon: <Clock size={24} />, color: 'bg-amber-500', trend: 'Priority', up: false },
-        { title: 'My Resolved', value: stats.closed, icon: <CheckCircle2 size={24} />, color: 'bg-sky-700', trend: '+2', up: true },
-        { title: 'Success Rate', value: stats.total ? `${Math.round((stats.closed / stats.total) * 100)}%` : '0%', icon: <Target size={24} />, color: 'bg-emerald-500', trend: '+2%', up: true },
+        { title: t('pages.dashboard.totalComplaints'), value: stats.total, icon: <ClipboardList size={24} />, color: 'bg-sky-600', trend: 'Active', up: true },
+        { title: t('pages.dashboard.pendingReview'), value: stats.pending, icon: <Clock size={24} />, color: 'bg-amber-500', trend: 'Priority', up: false },
+        { title: t('pages.dashboard.resolvedCases'), value: stats.closed, icon: <CheckCircle2 size={24} />, color: 'bg-sky-700', trend: '+2', up: true },
+        { title: t('pages.dashboard.appealed'), value: stats.total ? `${Math.round((stats.closed / stats.total) * 100)}%` : '0%', icon: <Target size={24} />, color: 'bg-emerald-500', trend: '+2%', up: true },
       ];
     }
 
@@ -104,10 +106,10 @@ export function Dashboard() {
       headOfficeRoles.includes(effectiveRole)
     ) {
       return [
-        { title: 'Total Complaints', value: stats.total, icon: <FileText size={24} />, color: 'bg-sky-600', trend: '+12%', up: true },
-        { title: 'Pending Review', value: stats.pending, icon: <Clock size={24} />, color: 'bg-amber-500', trend: '-5%', up: false },
-        { title: 'Unassigned Complaints', value: unassignedCount, icon: <AlertCircle size={24} />, color: 'bg-red-500', trend: 'Action Required', up: false },
-        { title: 'Resolved Cases', value: stats.closed, icon: <CheckCircle2 size={24} />, color: 'bg-sky-700', trend: '+15%', up: true },
+        { title: t('pages.dashboard.totalComplaints'), value: stats.total, icon: <FileText size={24} />, color: 'bg-sky-600', trend: '+12%', up: true },
+        { title: t('pages.dashboard.pendingReview'), value: stats.pending, icon: <Clock size={24} />, color: 'bg-amber-500', trend: '-5%', up: false },
+        { title: t('pages.dashboard.unassignedComplaints'), value: unassignedCount, icon: <AlertCircle size={24} />, color: 'bg-red-500', trend: 'Action Required', up: false },
+        { title: t('pages.dashboard.resolvedCases'), value: stats.closed, icon: <CheckCircle2 size={24} />, color: 'bg-sky-700', trend: '+15%', up: true },
       ];
     }
 

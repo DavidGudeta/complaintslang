@@ -1,6 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Outlet, Navigate, Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { Sidebar } from './Sidebar';
+import { LanguageSwitcher } from './LanguageSwitcher';
 import { useAuth } from '../contexts/AuthContext';
 import {
   LogOut,
@@ -19,6 +21,7 @@ import { NotificationBell } from './NotificationBell';
 import { UserRole } from '../types';
 
 export function InternalLayout() {
+  const { t } = useTranslation();
   const { user, logout, isLoading } = useAuth();
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -80,9 +83,10 @@ export function InternalLayout() {
                 className="hidden md:inline-flex items-center gap-2 rounded-2xl border border-sky-200 bg-sky-50 px-4 py-2 text-sm font-semibold text-sky-700 hover:bg-sky-100 transition"
               >
                 <ClipboardList size={16} />
-                Head Office Appeals
+                {t('pages.internalLayout.headOfficeAppeals')}
               </Link>
             )}
+            <LanguageSwitcher />
             <NotificationBell />
 
             <div ref={dropdownRef} className="relative">
@@ -112,11 +116,11 @@ export function InternalLayout() {
                   <p>{user?.email}</p>
 
                   {user?.role === UserRole.ADMIN && (
-                    <Link to="/admin/users">Admin Panel</Link>
+                    <Link to="/admin/users">{t('navigation.administration')}</Link>
                   )}
 
-                  <button onClick={logout}>
-                    <LogOut size={16} /> Logout
+                  <button onClick={logout} className="flex items-center gap-2">
+                    <LogOut size={16} /> {t('common.logout')}
                   </button>
                 </div>
               )}

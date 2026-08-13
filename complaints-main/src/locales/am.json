@@ -208,7 +208,7 @@
     "approved": "የተተገበሩ",
     "assessment": "ግምገማ",
     "assessed": "ግምገመ"
-do   },
+  },
   "pages": {
     "login": {
       "title": "የገቢ ሚኒስቴር",
@@ -435,6 +435,7 @@ do   },
     "update": "ያሻሽሉ",
     "search": "ፈልግ",
     "filter": "ይሰርዙ",
+    "hideFilters": "ማጣሪያዎችን ይደብቁ",
     "sort": "ደርድር",
     "export": "ወደ ውጪ ላክ",
     "import": "ወደ ውስጥ ይምጡ",
@@ -452,7 +453,8 @@ do   },
     "viewAll": "ሁሉን ተመልከት",
     "yes": "አዎ",
     "no": "ይህ ነው",
-    "ok": "ሆኖ ወሰደ"
+    "ok": "ሆኖ ወሰደ",
+    "reset": "ዳግም ስብስብ"
   },
   "form": {
     "requiredField": "ይህ መስክ ያስፈልጋል",

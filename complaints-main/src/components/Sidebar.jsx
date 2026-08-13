@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { 
   LayoutDashboard, 
   FileText, 
@@ -28,6 +29,7 @@ import logo from "../assets/images/mor-logo.png";
 
 
 export function Sidebar({ isOpen, onClose, isCollapsed }) {
+  const { t } = useTranslation();
   const { user } = useAuth();
   const location = useLocation();
   const [openMenus, setOpenMenus] = useState(['Cases', 'Manage', 'Reports', 'Settings', 'User Management']);
